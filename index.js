@@ -3,7 +3,8 @@ var express = require("express"),
     bodyParser  = require("body-parser"),
     methodOverride = require("method-override"),
     http = require('http'),
-    polyline = require('polyline');
+    polyline = require('polyline'),
+    path = require('path');
 
     var  mongoose = require('mongoose');
     mongoose.connect('mongodb://localhost/facultades');
@@ -34,11 +35,11 @@ var osrmServer="http://router.project-osrm.org"
 
 
 router.get('/admin', function(req, res) {
-    res.sendfile('../admin/index.html', {root: __dirname })(200);
+    res.sendfile(path.resolve('../admin/index.html'), {root: __dirname })(200);
 });
 
 router.get('/user', function(req, res) {
-    res.sendfile('../user/index.html', {root: __dirname })(200);
+    res.sendfile(path.resolve('../user/index.html'), {root: __dirname })(200);
 });
 
 router.get('/getAllFacultades', function(req, res) {
