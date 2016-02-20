@@ -41,6 +41,17 @@ $('#send').click( function() {
     });
 });
 
+$('#delete').click( function() {
+    $.ajax({
+        url: 'http://localhost:3000/addFacultad',
+        type: 'DELETE',
+        dataType: 'json',
+        data: $('#sendForm').serialize(),
+        success: function(data) {
+                   window.history.go(-1);
+                 }
+    });
+});
 
 
 //---------------------- Global map settings,functions,vars

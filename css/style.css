@@ -17,3 +17,14 @@ html, body {
 #container {
     height: 30%;
 }
+#gallerycontent .galleryitem{
+    width: 250px;
+    height: 250px;
+    background:url('../images/screen.png');
+    background-repeat: no-repeat;
+    padding: 5px 5px 5px 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    clear: both; display:inline-block
+}

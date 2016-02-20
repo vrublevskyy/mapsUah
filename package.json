@@ -1,21 +1,19 @@
 {
-  "name": "clientMap.js",
-  "version": "0.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/vrublevskyy/geoMaps.git"
-  },
-  "author": "",
-  "license": "BSD-2-Clause",
-  "bugs": {
-    "url": "https://github.com/vrublevskyy/geoMaps/issues"
-  },
-  "dependencies": {
-    "polyline": "~0.2.0"
-  }
+	"name": "clientMap.js",
+	"version": "0.0.0",
+	"bugs": {
+		"url": "https://github.com/vrublevskyy/geoMaps/issues"
+	},
+	"license": "BSD-2-Clause",
+	"main": "index.js",
+	"repository": {
+		"type": "git",
+		"url": "git://github.com/vrublevskyy/geoMaps.git"
+	},
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"dependencies": {
+		"polyline": "~0.2.0"
+	}
 }

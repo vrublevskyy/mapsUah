@@ -1,19 +1,26 @@
-var t = $.template('<div class="item">  \
-    <div class="row"> \
-        <div class="col-sm-3"><a href="#x" class="thumbnail"><img src="${url}" alt="${url}" class="img-responsive"></a> \
-        </div> \
-        <div class="col-sm-3"><a href="#x" class="thumbnail"><img src="${url}" alt="${url}" class="img-responsive"></a> \
-        </div> \
-        <div class="col-sm-3"><a href="#x" class="thumbnail"><img src="${url}" alt="${url}" class="img-responsive"></a> \
-        </div> \
-        <div class="col-sm-3"><a href="#x" class="thumbnail"><img src="${url}" alt="${url}" class="img-responsive"></a> \
-        </div> \
-    </div> \
-    <!--/row--> \
-</div>');
+$.ajax({
+    url: 'http://localhost:3000/getAllFacultades',
+    type: 'GET',
+    dataType: 'json',
+    success: function(data) {
+               console.log(data)
+               for (var facultad in data) {
+                 $('#facultades').append("<div class=\"col-lg-3 col-md-4 col-xs-6 thumb\"> <a href=\"file:///home/ivan/git/clientMapAdmin/manage.html\"><img src="+data[facultad].properties.imgSrc+" alt=\"\" /></a>  \
+                   <h4><a href=\"file:///home/ivan/git/clientMapAdmin/manage.html/?"+data[facultad].properties.name+"\">"+data[facultad].properties.name+"</a></h4> \
+                   <p>"+data[facultad].properties.info+"</p> \
+                 </div>");
+               }
+
+             },
+    error: function(XMLHttpRequest, textStatus, errorThrown) {
+        console.log("Status: " + textStatus); console.log("Error: " + errorThrown);
+    }
+
+});
 
 
-$(selector).append( t , {
-     url: jsonObj.url,
-     name: jsonObj.name
+
+
+$(document).ready(function () {
+
 });
