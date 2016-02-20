@@ -3,10 +3,22 @@ var express = require("express"),
     bodyParser  = require("body-parser"),
     methodOverride = require("method-override"),
     http = require('http'),
-    polyline = require('polyline'),
-    mongoDB= require('./mongo.js');
+    polyline = require('polyline');
 
-myMongo= new mongoDB()
+    var  mongoose = require('mongoose');
+    mongoose.connect('mongodb://localhost/facultades');
+
+    var db = mongoose.connection;
+    db.on('error', console.error.bind(console, 'connection error:'));
+    db.once('open', function() {
+      console.log("OPEN")
+    });
+
+
+    var control=require('./controllers/facultades');
+
+
+
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(function(req, res, next) {
@@ -21,59 +33,58 @@ var router = express.Router();
 var osrmServer="http://router.project-osrm.org"
 
 
-router.get('/', function(req, res) {
-   res.send("OK");
+router.get('/admin', function(req, res) {
+    res.sendfile('../admin/index.html', {root: __dirname })(200);
 });
 
-router.post('/search/route', function(req, res) {
-  var reqData=req.body;
-  var options = {
-    host: osrmServer,
-    path1: '/viaroute?loc='+reqData.origin.lat+','+reqData.origin.lng+'&loc='+reqData.destination.lat+','+reqData.destination.lng+'&instructions=false&compression=false',
-    path: '/viaroute?loc=52.503033,13.420526&loc=52.516582,13.429290&instructions=false&compression=false'
-  };
-  callback = function(response) {
-    var str = '';
+router.get('/user', function(req, res) {
+    res.sendfile('../user/index.html', {root: __dirname })(200);
+});
 
-    //another chunk of data has been recieved, so append it to `str`
-    response.on('data', function (chunk) {
-      str += chunk;
-    });
+router.get('/getAllFacultades', function(req, res) {
+  var callback=function(data) {
+    res.send(data);
+  }
+  control.getAllFacultades(callback)
 
-  //the whole response has been recieved, so we just print it out here
-    response.on('end', function () {
-      str=JSON.parse(str.replace(/[\r\n ]+/g,""))
-      console.log(str.route_geometry)
-      res.send(str)
-    });
+});
+
+router.post('/addFacultad', function(req, res) {
+  control.addFacultad(req.body)
+  res.sendStatus(200);
+});
+
+router.post('/updateFacultad', function(req, res) {
+  control.addFacultad(req.body)
+  res.sendStatus(200);
+});
+
+router.delete('/removeFacultad', function(req, res) {
+  control.addFacultad(req.body)
+  res.sendStatus(200);
+});
+
+router.post('/search/facultad', function(req, res) {
+  if (req.body.name) {
+    var callback=function(data) {
+      res.send(data);
+    }
+    control.findOne(req.body.name,callback)
   }
 
-  http.request(options, callback).end();
 });
 
-router.get('/search/place', function(req, res) {
-   res.send("/search/place");
-});
 
-router.get('/search/nearest', function(req, res) {
-   res.send("('/search/nearest");
-});
-
-router.post('/add/element/faculty', function(req, res) {
-   res.send("/add/element/faculty");
-});
-
-router.post('/update/element/faculty', function(req, res) {
-   res.send("/update/element/faculty");
-});
-
-router.post('/delete/element/faculty', function(req, res) {
-   res.send("/delete/element/faculty");
-});
 app.use(router);
 
 
 app.listen(3000, function() {
   console.log("Node server running on http://localhost:3000");
-  myMongo.connect()
 });
+
+
+control.remove("56ba5fb00f0a026e24a7850c")
+var callback=function(data) {
+  console.log(JSON.stringify(data));
+}
+control.findByName("informatica",callback);

@@ -3,18 +3,18 @@ var Facultad=require('../models/facultad');
 var exports = module.exports
 
 
-exports.addFacultad=function() {
+exports.addFacultad=function(data) {
 
   var facultad1=new Facultad({
     type: "Feature",
     geometry:{
       type:"Point",
-      coordinates:[35,22]
+      coordinates:data.Coordinates
     },
     properties:{
-      "imgSrc": "http://www.uah.es/grafica/universidad/galeria_facultades_escuelas/escuela_informatica_min.jpg",
-      "name":"informatica",
-      "info":"Facultad Informatica"
+      "imgSrc": data.img,
+      "name":data.name,
+      "info":data.info
     }
   })
 
@@ -25,16 +25,32 @@ exports.addFacultad=function() {
 }
 
 
-exports.findAllFacultades = function() {
+exports.getAllFacultades = function(callback) {
   Facultad.find(function(err, facultades) {
     if(err) console.log(err);
-    console.log(facultades)
+    return callback(facultades);
   });
 };
 
-exports.findOne=function(filter) {
-  Facultad.findOne({ 'properties.name': filter }, 'properties.imgSrc', function (err, facultad) {
+exports.findByName=function(filter,callback) {
+  Facultad.findOne({ 'properties.name': filter }, '', function (err, facultad) {
     if (err) return handleError(err);
-    console.log(JSON.stringify(facultad)) // Space Ghost is a talk show host.
+        return callback(facultad);
   })
+}
+
+exports.remove=function(id,callback) {
+  Facultad.remove({ _id: id }, function(err) {
+    if (!err) {
+        console.log(err)
+        if (callback) {
+          return callback()
+        }
+    }
+    else {
+      if (callback) {
+        return callback()
+      }
+    }
+  });
 }
