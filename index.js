@@ -81,10 +81,3 @@ app.use(router);
 app.listen(3000, function() {
   console.log("Node server running on http://localhost:3000");
 });
-
-
-control.remove("56ba5fb00f0a026e24a7850c")
-var callback=function(data) {
-  console.log(JSON.stringify(data));
-}
-control.findByName("informatica",callback);
