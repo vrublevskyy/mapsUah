@@ -1,6 +1,5 @@
 //---------------------- Global vars
 var map = L.map('map').setView([40.5126759, -3.3502846], 13);
-var myServer="http://router.project-osrm.org"
 var routeCoordinates={
   "origin":{
     "lat":null,
@@ -31,7 +30,7 @@ function getLocation(myCallback) {
 
 $('#send').click( function() {
     $.ajax({
-        url: 'http://localhost:3000/addFacultad',
+        url: 'http://www.paradisecity.me:3000/addFacultad',
         type: 'post',
         dataType: 'json',
         data: $('#sendForm').serialize(),
@@ -43,7 +42,7 @@ $('#send').click( function() {
 
 $('#delete').click( function() {
     $.ajax({
-        url: 'http://localhost:3000/addFacultad',
+        url: 'http://www.paradisecity.me:3000/addFacultad',
         type: 'DELETE',
         dataType: 'json',
         data: $('#sendForm').serialize(),
@@ -82,3 +81,8 @@ $( "#lng" ).change(function(value) {
 });
 
 //---------------------- Map operations: routes, search points.....
+
+
+$(document).ready(function () {
+
+});

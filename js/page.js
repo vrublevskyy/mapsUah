@@ -1,5 +1,5 @@
 $.ajax({
-    url: 'http://localhost:3000/getAllFacultades',
+    url: 'http://www.paradisecity.me:3000/getAllFacultades',
     type: 'GET',
     dataType: 'json',
     success: function(data) {
