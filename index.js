@@ -35,11 +35,12 @@ var osrmServer="http://router.project-osrm.org"
 
 
 router.get('/admin', function(req, res) {
-    res.sendfile(path.resolve('../admin/index.html'), {root: __dirname })(200);
+  var path = 'index.html';
+  res.sendFile(path, {'root': '../clientMapAdmin'});
 });
 
 router.get('/user', function(req, res) {
-    res.sendfile(path.resolve('../user/index.html'), {root: __dirname })(200);
+    res.sendFile(__datadir+'../user/index.html')(200);
 });
 
 router.get('/getAllFacultades', function(req, res) {
@@ -58,6 +59,15 @@ router.post('/addFacultad', function(req, res) {
 router.post('/updateFacultad', function(req, res) {
   control.addFacultad(req.body)
   res.sendStatus(200);
+});
+
+router.get('/findById', function(req, res) {
+  if (req.body.name) {
+    var callback=function(data) {
+      res.send(data);
+    }
+    control.findOne(req.body.id,callback)
+  }
 });
 
 router.delete('/removeFacultad', function(req, res) {

@@ -39,6 +39,13 @@ exports.findByName=function(filter,callback) {
   })
 }
 
+exports.findById=function(filter,callback) {
+  Facultad.findOne({ '_id': filter }, '', function (err, facultad) {
+    if (err) return handleError(err);
+        return callback(facultad);
+  })
+}
+
 exports.remove=function(id,callback) {
   Facultad.remove({ _id: id }, function(err) {
     if (!err) {
