@@ -97,7 +97,7 @@ $(document).ready(function () {
                 document.getElementById("lng").value = data.geometry.coordinates[1];
                 document.getElementById("name").value = data.properties.name;
                 document.getElementById("img").value = data.properties.imgSrc;
-                document.getElementById("info").value = data.properties,info;
+                document.getElementById("info").value = data.properties.info;
                },
       error:  function(XMLHttpRequest, textStatus, errorThrown) {
           console.log("Status: " + textStatus); console.log("Error: " + errorThrown);
