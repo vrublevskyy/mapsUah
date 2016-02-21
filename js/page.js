@@ -5,8 +5,8 @@ $.ajax({
     success: function(data) {
                console.log(data)
                for (var facultad in data) {
-                 $('#facultades').append("<div class=\"col-lg-3 col-md-4 col-xs-6 thumb\"> <a href=\"file:///home/ivan/git/clientMapAdmin/manage.html\"><img src="+data[facultad].properties.imgSrc+" alt=\"\" /></a>  \
-                   <h4><a href=\"file:///home/ivan/git/clientMapAdmin/manage.html/?"+data[facultad].properties.name+"\">"+data[facultad].properties.name+"</a></h4> \
+                 $('#facultades').append("<div class=\"col-lg-3 col-md-4 col-xs-6 thumb\"> <a href=\"http://ivr0.myqnapcloud.com:8082/admin/manage.html#"+data[facultad]._id+\"><img src="+data[facultad].properties.imgSrc+" alt=\"\" /></a>  \
+                   <h4><a href=\"http://ivr0.myqnapcloud.com:8082/admin/manage.html/#"+data[facultad]._id+"\">"+data[facultad].properties.name+"</a></h4> \
                    <p>"+data[facultad].properties.info+"</p> \
                  </div>");
                }
