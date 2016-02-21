@@ -84,21 +84,23 @@ $( "#lng" ).change(function(value) {
 
 
 $(document).ready(function () {
-
-});
-var parser = document.createElement('a');
-parser.href = window.location.href;
-data={"id":parser.hash.replace(/\#/g, '') }
-console.log(data)
-$.ajax({
-    url: 'http://www.paradisecity.me:3000/findById',
-    type: 'GET',
-    dataType: 'json',
-    data: data,
-    success: function(data) {
-               console.log(data);
-             },
-    error:  function(XMLHttpRequest, textStatus, errorThrown) {
-        console.log("Status: " + textStatus); console.log("Error: " + errorThrown);
-    }
+  var parser = document.createElement('a');
+  parser.href = window.location.href;
+  data={"id":parser.hash.replace(/\#/g, '') }
+  $.ajax({
+      url: 'http://www.paradisecity.me:3000/findById',
+      type: 'POST',
+      dataType: 'json',
+      data: data,
+      success: function(data) {
+                document.getElementById("lat").value = data.geometry.coordinates[0];
+                document.getElementById("lng").value = data.geometry.coordinates[1];
+                document.getElementById("name").value = data.properties.name;
+                document.getElementById("img").value = data.properties.imgSrc;
+                document.getElementById("info").value = data.properties,info;
+               },
+      error:  function(XMLHttpRequest, textStatus, errorThrown) {
+          console.log("Status: " + textStatus); console.log("Error: " + errorThrown);
+      }
+  });
 });
