@@ -2,9 +2,8 @@ var express = require("express"),
     app = express(),
     bodyParser  = require("body-parser"),
     methodOverride = require("method-override"),
-    http = require('http'),
-    polyline = require('polyline'),
-    path = require('path');
+    http = require('http');
+
 
     var  mongoose = require('mongoose');
     mongoose.connect('mongodb://localhost/facultades');
@@ -33,15 +32,6 @@ var router = express.Router();
 
 var osrmServer="http://router.project-osrm.org"
 
-
-router.get('/admin', function(req, res) {
-  var path = 'index.html';
-  res.sendFile(path, {'root': '../clientMapAdmin'});
-});
-
-router.get('/user', function(req, res) {
-    res.sendFile(__datadir+'../user/index.html')(200);
-});
 
 router.get('/getAllFacultades', function(req, res) {
   var callback=function(data) {
