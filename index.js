@@ -69,7 +69,7 @@ router.post('/updateFacultad', function(req, res) {
   }
 });
 
-router.delete('/removeFacultad', function(req, res) {
+router.post('/removeFacultad', function(req, res) {
   if (req.body.id) {
     var callback=function(err,data) {
       if (err) {
