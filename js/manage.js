@@ -39,11 +39,11 @@ $('#send').click( function() {
         data: data,
         success: function(data) {
                   alert("Actualizado");
-                   window.location.href="192.168.1.150:8082/index.html"
+                   window.location.href="http://192.168.1.150:8082/index.html"
                  },
          error:  function(XMLHttpRequest, textStatus, errorThrown) {
              alert("Status: " + textStatus+"Error: " + errorThrown);
-             window.location.href="192.168.1.150:8082/index.html"
+             window.location.href="http://192.168.1.150:8082/index.html"
          }
     });
 });
@@ -54,16 +54,16 @@ $('#delete').click( function() {
   data={"id":parser.hash.replace(/\#/g, '') }
     $.ajax({
         url: 'http://www.paradisecity.me:3000/removeFacultad',
-        type: 'delete',
+        type: 'post',
         dataType: 'json',
         data: data,
         success: function(data) {
                 alert("Eliminado");
-                   window.location.href="192.168.1.150:8082/index.html"
+                   window.location.href="http://192.168.1.150:8082/index.html"
                  },
          error:  function(XMLHttpRequest, textStatus, errorThrown) {
              alert("Status: " + textStatus+"Error: " + errorThrown);
-             window.location.href="192.168.1.150:8082/index.html"
+             window.location.href="http://192.168.1.150:8082/index.html"
          }
     });
 });
