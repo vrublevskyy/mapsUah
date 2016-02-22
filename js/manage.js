@@ -53,13 +53,13 @@ $('#delete').click( function() {
   data={"id":parser.hash.replace(/\#/g, '') }
     $.ajax({
         url: 'http://www.paradisecity.me:3000/removeFacultad',
-        type: 'DELETE',
+        type: 'delete',
         dataType: 'json',
         data: data,
         success: function(data) {
                 alert("Eliminado");
                    window.history.go(-1);
-                 }
+                 },
          error:  function(XMLHttpRequest, textStatus, errorThrown) {
              alert("Status: " + textStatus+"Error: " + errorThrown);
          }
