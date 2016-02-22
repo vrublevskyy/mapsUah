@@ -63,6 +63,7 @@ $('#delete').click( function() {
              window.location.href="http://192.168.1.150:8082/index.html"
          }
     });
+    return false;
 });
 
 
