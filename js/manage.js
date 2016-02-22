@@ -11,9 +11,6 @@ var routeCoordinates={
   }
 }
 var position=null
-var parser = document.createElement('a');
-parser.href = window.location.href;
-documentDB={"id":parser.hash.replace(/\#/g, '') }
 
 function getLocation(myCallback) {
   function setPosition(position) {
@@ -31,13 +28,12 @@ function getLocation(myCallback) {
 }
 
 $('#send').click( function() {
-  data=$('#sendForm').serialize();
-  data['_id']=documentDB;
+
     $.ajax({
         url: 'http://www.paradisecity.me:3000/updateFacultad',
         type: 'post',
         dataType: 'json',
-        data: ,
+        data: data=$('#sendForm').serialize(),
         success: function(data) {
                   alert("Actualizado");
                    window.location.href="http://192.168.1.150:8082/index.html"
@@ -50,11 +46,14 @@ $('#send').click( function() {
 });
 
 $('#delete').click( function() {
+  var parser = document.createElement('a');
+  parser.href = window.location.href;
+  data={"id":parser.hash.replace(/\#/g, '') }
     $.ajax({
         url: 'http://www.paradisecity.me:3000/removeFacultad',
         type: 'post',
         dataType: 'json',
-        data: documentDB,
+        data: data,
         success: function(data) {
                 alert("Eliminado");
                    window.location.href="http://192.168.1.150:8082/index.html"
@@ -107,6 +106,7 @@ $(document).ready(function () {
       dataType: 'json',
       data: data,
       success: function(data) {
+                document.getElementById("doc_id").value =data['_id']
                 document.getElementById("lat").value = data.geometry.coordinates[0];
                 document.getElementById("lng").value = data.geometry.coordinates[1];
                 document.getElementById("name").value = data.properties.name;
