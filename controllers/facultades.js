@@ -53,7 +53,7 @@ exports.remove=function(id,callback) {
     }
     else {
       if (callback) {
-        return callback()
+        return callback(null,id)
       }
     }
   });

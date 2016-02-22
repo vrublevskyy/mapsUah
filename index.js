@@ -70,8 +70,15 @@ router.post('/updateFacultad', function(req, res) {
 });
 
 router.delete('/removeFacultad', function(req, res) {
-  control.addFacultad(req.body)
-  res.sendStatus(200);
+  if (req.body.id) {
+    var callback=function(err,data) {
+      if (err) {
+        res.sendStatus(404);
+      }
+      res.sendStatus(200);
+    }
+    control.remove(req.body.id,callback)
+  }
 });
 
 router.post('/search/facultad', function(req, res) {
