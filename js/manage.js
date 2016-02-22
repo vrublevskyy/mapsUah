@@ -39,10 +39,11 @@ $('#send').click( function() {
         data: data,
         success: function(data) {
                   alert("Actualizado");
-                   window.history.go(-1);
+                   window.location.href="192.168.1.150:8082/index.html"
                  },
          error:  function(XMLHttpRequest, textStatus, errorThrown) {
              alert("Status: " + textStatus+"Error: " + errorThrown);
+             window.location.href="192.168.1.150:8082/index.html"
          }
     });
 });
@@ -58,10 +59,11 @@ $('#delete').click( function() {
         data: data,
         success: function(data) {
                 alert("Eliminado");
-                   window.history.go(-1);
+                   window.location.href="192.168.1.150:8082/index.html"
                  },
          error:  function(XMLHttpRequest, textStatus, errorThrown) {
              alert("Status: " + textStatus+"Error: " + errorThrown);
+             window.location.href="192.168.1.150:8082/index.html"
          }
     });
 });
