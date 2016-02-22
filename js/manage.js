@@ -29,14 +29,12 @@ function getLocation(myCallback) {
 }
 
 $('#send').click( function() {
-  var parser = document.createElement('a');
-  parser.href = window.location.href;
-  data={"id":parser.hash.replace(/\#/g, '') }
+
     $.ajax({
         url: 'http://www.paradisecity.me:3000/updateFacultad',
         type: 'post',
         dataType: 'json',
-        data: data,
+        data: $('#sendForm').serialize(),
         success: function(data) {
                   alert("Actualizado");
                    window.location.href="http://192.168.1.150:8082/index.html"
