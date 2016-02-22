@@ -46,10 +46,6 @@ router.post('/addFacultad', function(req, res) {
   res.sendStatus(200);
 });
 
-router.post('/updateFacultad', function(req, res) {
-  control.addFacultad(req.body)
-  res.sendStatus(200);
-});
 
 router.post('/findById', function(req, res) {
   if (req.body.id) {
@@ -61,11 +57,12 @@ router.post('/findById', function(req, res) {
 });
 
 router.post('/updateFacultad', function(req, res) {
+	console.log(req.body)
   if (req.body.id) {
     var callback=function(data) {
-      res.send(data);
+      res.sendStatus(200);
     }
-    control.updateFacultad(req.body.id,callback)
+    control.updateFacultad(req.body.id,req.body,callback)
   }
 });
 

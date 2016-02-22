@@ -59,8 +59,9 @@ exports.remove=function(id,callback) {
   });
 }
 
-exports.updateFacultad=function(id,data) {
-    Facultad.update({_id: id}, data, {upsert: true}, function(err) {
+exports.updateFacultad=function(id,data,callback) {
+	console.log(data)
+    Facultad.update({_id: id},{ 'properties.name':data.name, 'properties.imgSrc':data.img, 'properties.info':data.info, 'geometry.coordinates':data.Coordinates}, {upsert: false}, function(err) {
       if (!err) {
           console.log(err)
       }
