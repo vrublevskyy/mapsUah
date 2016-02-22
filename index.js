@@ -51,12 +51,21 @@ router.post('/updateFacultad', function(req, res) {
   res.sendStatus(200);
 });
 
-router.get('/findById', function(req, res) {
-  if (req.body.name) {
+router.post('/findById', function(req, res) {
+  if (req.body.id) {
     var callback=function(data) {
       res.send(data);
     }
-    control.findOne(req.body.id,callback)
+    control.findById(req.body.id,callback)
+  }
+});
+
+router.post('/updateFacultad', function(req, res) {
+  if (req.body.id) {
+    var callback=function(data) {
+      res.send(data);
+    }
+    control.updateFacultad(req.body.id,callback)
   }
 });
 

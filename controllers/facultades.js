@@ -50,9 +50,6 @@ exports.remove=function(id,callback) {
   Facultad.remove({ _id: id }, function(err) {
     if (!err) {
         console.log(err)
-        if (callback) {
-          return callback()
-        }
     }
     else {
       if (callback) {
@@ -60,4 +57,17 @@ exports.remove=function(id,callback) {
       }
     }
   });
+}
+
+exports.updateFacultad=function(id,data) {
+    Facultad.update({_id: id}, data, {upsert: true}, function(err) {
+      if (!err) {
+          console.log(err)
+      }
+      else {
+        if (callback) {
+          return callback()
+        }
+      }
+    });
 }
