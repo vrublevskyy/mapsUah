@@ -29,26 +29,40 @@ function getLocation(myCallback) {
 }
 
 $('#send').click( function() {
+  var parser = document.createElement('a');
+  parser.href = window.location.href;
+  data={"id":parser.hash.replace(/\#/g, '') }
     $.ajax({
-        url: 'http://www.paradisecity.me:3000/addFacultad',
+        url: 'http://www.paradisecity.me:3000/updateFacultad',
         type: 'post',
         dataType: 'json',
-        data: $('#sendForm').serialize(),
+        data: data,
         success: function(data) {
+                  alert("Actualizado");
                    window.history.go(-1);
-                 }
+                 },
+         error:  function(XMLHttpRequest, textStatus, errorThrown) {
+             alert("Status: " + textStatus+"Error: " + errorThrown);
+         }
     });
 });
 
 $('#delete').click( function() {
+  var parser = document.createElement('a');
+  parser.href = window.location.href;
+  data={"id":parser.hash.replace(/\#/g, '') }
     $.ajax({
-        url: 'http://www.paradisecity.me:3000/addFacultad',
+        url: 'http://www.paradisecity.me:3000/removeFacultad',
         type: 'DELETE',
         dataType: 'json',
-        data: $('#sendForm').serialize(),
+        data: data,
         success: function(data) {
+                alert("Eliminado");
                    window.history.go(-1);
                  }
+         error:  function(XMLHttpRequest, textStatus, errorThrown) {
+             alert("Status: " + textStatus+"Error: " + errorThrown);
+         }
     });
 });
 
@@ -98,9 +112,10 @@ $(document).ready(function () {
                 document.getElementById("name").value = data.properties.name;
                 document.getElementById("img").value = data.properties.imgSrc;
                 document.getElementById("info").value = data.properties.info;
+                marker.setLatLng(data.geometry.coordinates);
                },
-      error:  function(XMLHttpRequest, textStatus, errorThrown) {
-          console.log("Status: " + textStatus); console.log("Error: " + errorThrown);
-      }
+     error:  function(XMLHttpRequest, textStatus, errorThrown) {
+         alert("Status: " + textStatus+"Error: " + errorThrown);
+     }
   });
 });
