@@ -1,19 +1,26 @@
-var t = $.template('<div class="item">  \
-    <div class="row"> \
-        <div class="col-sm-3"><a href="#x" class="thumbnail"><img src="${url}" alt="${url}" class="img-responsive"></a> \
-        </div> \
-        <div class="col-sm-3"><a href="#x" class="thumbnail"><img src="${url}" alt="${url}" class="img-responsive"></a> \
-        </div> \
-        <div class="col-sm-3"><a href="#x" class="thumbnail"><img src="${url}" alt="${url}" class="img-responsive"></a> \
-        </div> \
-        <div class="col-sm-3"><a href="#x" class="thumbnail"><img src="${url}" alt="${url}" class="img-responsive"></a> \
-        </div> \
-    </div> \
-    <!--/row--> \
-</div>');
+$(document).ready(function () {
+    $.ajax({
+    url: 'http://www.paradisecity.me:3000/getAllFacultades',
+    type: 'GET',
+    dataType: 'json',
+    success: function(data) {
+               console.log(data)
+               for (var facultad in data) {
+                 $('#facultades').append("<div class=\"col-lg-3 col-md-4 col-xs-6 thumb onclick=\"setPoint(\"+data._id+\")\"> <a href=\"#"+data[facultad]._id+"\"><img src="+data[facultad].properties.imgSrc+" alt=\"\" /></a>  \
+                   <h4><a href=\"#"\">"+data[facultad].properties.name+"</a></h4> \
+                   <p>"+data[facultad].properties.info+"</p> \
+                 </div>");
+               }
 
+             },
+    error: function(XMLHttpRequest, textStatus, errorThrown) {
+        console.log("Status: " + textStatus); console.log("Error: " + errorThrown);
+    }
 
-$(selector).append( t , {
-     url: jsonObj.url,
-     name: jsonObj.name
+    });
 });
+
+function setPoint (data){
+    console.log(data)
+    
+}
