@@ -6,7 +6,7 @@ $(document).ready(function () {
     success: function(data) {
                console.log(data)
                for (var facultad in data) {
-                 $('#facultades').append("<div class=\"col-lg-3 col-md-4 col-xs-6 thumb onclick=\"setPoint(\"+data._id+\")\"> <a href=\"#"+data[facultad]._id+"\"><img src="+data[facultad].properties.imgSrc+" alt=\"\" /></a>  \
+                 $('#facultades').append("<div class=\"col-lg-3 col-md-4 col-xs-6 thumb onclick=setPoint(\"+data._id+\")> <a href=\"#"+data[facultad]._id+"\"><img src="+data[facultad].properties.imgSrc+" alt=\"\" /></a>  \
                    <h4><a href=\"#"\">"+data[facultad].properties.name+"</a></h4> \
                    <p>"+data[facultad].properties.info+"</p> \
                  </div>");
