@@ -5,11 +5,13 @@ $(document).ready(function () {
     dataType: 'json',
     success: function(data) {
                console.log(data)
+               var htmlCode="<div class=\"col-lg-3 col-md-4 col-xs-6 thumb\" onclick=\"setPoint("+data[facultad]._id+")\"> \
+               <img src="+data[facultad].properties.imgSrc+" alt=\"\" /></a>  \
+               <h4><a href=\"#"\">"+data[facultad].properties.name+"</a></h4> \
+               <p>"+data[facultad].properties.info+"</p></div>"
+               console.log(htmlCode)
                for (var facultad in data) {
-                 $('#facultades').append("<div class=\"col-lg-3 col-md-4 col-xs-6 thumb\" onclick=\"setPoint("+data[facultad]._id+")\"> \
-                 <img src="+data[facultad].properties.imgSrc+" alt=\"\" /></a>  \
-                 <h4><a href=\"#"\">"+data[facultad].properties.name+"</a></h4> \
-                 <p>"+data[facultad].properties.info+"</p></div>");
+                 $('#facultades').append(htmlCode);
                }
 
              },
@@ -22,10 +24,9 @@ $(document).ready(function () {
 
 function setPoint (data){
     console.log(data)
-
 }
 
-"<div class=\"col-lg-3 col-md-4 col-xs-6 thumb\" onclick=\"setPoint("+data[facultad]._id+")\"> \
-<img src="+data[facultad].properties.imgSrc+" alt=\"\" /></a>  \
-<h4><a href=\"#"\">"+data[facultad].properties.name+"</a></h4> \
-<p>"+data[facultad].properties.info+"</p></div>"
+("<div class=\"col-lg-3 col-md-4 col-xs-6 thumb\" onclick=\"setPoint("+data[facultad]._id+")\"><img src="+data[facultad].properties.imgSrc+" alt=\"\" /></a><h4><a href=\"#"\">"+data[facultad].properties.name+"</a></h4><p>"+data[facultad].properties.info+"</p></div>")
+
+
+("<div class=\"col-lg-3 col-md-4 col-xs-6 thumb\" onclick=\"setPoint("+data[facultad]._id+")\"><img src=\""+data[facultad].properties.imgSrc+"\" alt=\"\" /></a><h4><a href=\"#"\">"+data[facultad].properties.name+"</a></h4><p>"+data[facultad].properties.info+"</p></div>"
