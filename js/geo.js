@@ -50,7 +50,6 @@ function searchRouteFromGPS (id){
               routeCoordinates.destination.lat = data.geometry.coordinates[0];
               routeCoordinates.destination.lng = data.geometry.coordinates[1];
 
-              marker.setLatLng(data.geometry.coordinates);
               routeFromMyLocToDest();
              },
    error:  function(XMLHttpRequest, textStatus, errorThrown) {
@@ -82,10 +81,10 @@ L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
   attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
 }).addTo(map);
 
-
+var marker = L.marker([0,0]).addTo(map);
 
 function onMapClick(e) {
-  var marker = L.marker([e.latlng.lat,e.latlng.lng]).addTo(map);
+  marker.setLatLng(e.latlng);
   routeCoordinates.destination=e.latlng
 }
 
