@@ -60,14 +60,13 @@ exports.remove=function(id,callback) {
 }
 
 exports.updateFacultad=function(id,data,callback) {
-	console.log(data)
-    Facultad.update({_id: id},{ 'properties.name':data.name, 'properties.imgSrc':data.img, 'properties.info':data.info, 'geometry.coordinates':data.Coordinates}, {upsert: false}, function(err) {
-      if (!err) {
+	 Facultad.update({_id: id},{ 'properties.name':data.name, 'properties.imgSrc':data.img, 'properties.info':data.info, 'geometry.coordinates':data.Coordinates}, {upsert: false}, function(err,data) {
+      if (err) {
           console.log(err)
       }
       else {
         if (callback) {
-          return callback()
+          return callback(data)
         }
       }
     });

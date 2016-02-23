@@ -57,10 +57,10 @@ router.post('/findById', function(req, res) {
 });
 
 router.post('/updateFacultad', function(req, res) {
-	console.log(req.body)
   if (req.body.id) {
     var callback=function(data) {
-      res.sendStatus(200);
+console.log("OK")
+      res.send(data);
     }
     control.updateFacultad(req.body.id,req.body,callback)
   }
