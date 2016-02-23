@@ -16,7 +16,48 @@ var position=null
 //---------------------- Global settings functions
 
 $(document).ready(function () {
+  $.ajax({
+  url: 'http://www.paradisecity.me:3000/getAllFacultades',
+  type: 'GET',
+  dataType: 'json',
+  success: function(data) {
+             console.log(data)
+             for (var facultad in data) {
+console.log(data[facultad]._id)
+
+               $('#facultades').append("<div id=\""+facultad+"\" class=\"col-lg-3 col-md-4 col-xs-6 thumb\"> <a><img src="+data[facultad].properties.imgSrc+"></a>  \
+                 <h4><a>"+data[facultad].properties.name+"</a></h4> \
+                 <p>"+data[facultad].properties.info+"</p> \
+                 <button type=\"button\" class=\"btn btn-default btn-lg\" onclick=\"searchRouteFromGPS('"+data[facultad]._id+"')\" >Desde mi pos</button> \
+                 <button type=\"button\" class=\"btn btn-default btn-lg\" onclick=\"searchRouteFromMap('"+data[facultad]._id+"')\" >Desde el punto del mapa</button> \
+               </div>");
+             }
+           },
+  error: function(XMLHttpRequest, textStatus, errorThrown) {
+      console.log("Status: " + textStatus); console.log("Error: " + errorThrown);
+  }
+
+  });
 });
+
+function searchRouteFromGPS (id){
+  $.ajax({
+    url: 'http://www.paradisecity.me:3000/findById',
+    type: 'POST',
+    dataType: 'json',
+    data: {'id':id},
+    success: function(data) {
+              routeCoordinates.destination.lat = data.geometry.coordinates[0];
+              routeCoordinates.destination.lng = data.geometry.coordinates[1];
+
+              marker.setLatLng(data.geometry.coordinates);
+              routeFromMyLocToDest();
+             },
+   error:  function(XMLHttpRequest, textStatus, errorThrown) {
+       alert("Status: " + textStatus+"Error: " + errorThrown);
+   }
+});
+}
 
 function getLocation(myCallback) {
   function setPosition(position) {
@@ -97,7 +138,6 @@ function routeFromMyLocToCusPoint() {
   function myCallback(position) {
     routeCoordinates.origin.lat=position.latitude;
     routeCoordinates.origin.lng=position.longitude;
-    console.log("1")
     console.log(position)
     getRoute(routeCoordinates)
   }
