@@ -1,21 +1,24 @@
 {
-  "name": "clientMap.js",
+  "name": "mapsUah",
   "version": "0.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "description": "Mapas UAH",
+  "bugs": {
+    "url": "https://github.com/vrublevskyy/mapsUah/issues"
   },
+  "license": "BSD-2-Clause",
+  "author": "Ivan Vrublevskyy",
+  "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "git://github.com/vrublevskyy/geoMaps.git"
+    "url": "git://github.com/vrublevskyy/mapsUah.git"
   },
-  "author": "",
-  "license": "BSD-2-Clause",
-  "bugs": {
-    "url": "https://github.com/vrublevskyy/geoMaps/issues"
+  "scripts": {
+    "test": "node ./test/index.js"
   },
   "dependencies": {
-    "polyline": "~0.2.0"
+    "express": "~4.13.4",
+    "body-parser": "~1.14.2",
+    "method-override": "~2.3.5",
+    "path": "~0.12.7"
   }
 }
