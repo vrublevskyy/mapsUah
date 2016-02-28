@@ -18,7 +18,14 @@
 	<div class="container">
 		<div class="col-md-12">
 
-			<form class="form-horizontal" id="sendForm">
+			<div class="col-md-2" style="margin-top:20px">
+				<label class="col-md-4 control-label"></label>
+				<div class="col-md-1">
+					<button id="delete" name="delete" class="btn btn-default">Eliminar</button>
+				</div>
+			</div>
+
+			<form class="form-horizontal" id="sendForm" class="col-md-10">
 				<fieldset>
 
 					<!-- Form Name -->
@@ -26,16 +33,23 @@
 
 					<!-- Text input-->
 					<div class="form-group">
-						<label class="col-md-4 control-label" for="name">Facultad</label>
+						<label class="col-md-2 control-label" for="id">ID</label>
 						<div class="col-md-4">
-							<input id="name" name="name" type="text"  class="form-control input-md" required="">
-
+							<input id="doc_id" name="id" type="text"  class="form-control input-md" required="">
 						</div>
 					</div>
 
 					<!-- Text input-->
 					<div class="form-group">
-						<label class="col-md-4 control-label" for="coord">Latitud</label>
+						<label class="col-md-2 control-label" for="name">Facultad</label>
+						<div class="col-md-4">
+							<input id="name" name="name" type="text"  class="form-control input-md" required="">
+						</div>
+					</div>
+
+					<!-- Text input-->
+					<div class="form-group">
+						<label class="col-md-2 control-label" for="coord">Latitud</label>
 						<div class="col-md-4">
 							<input id="lat" name="Coordinates" type="number" pattern="[0-9]+([\.,][0-9]+)?" step="0.0001" class="form-control input-md" required="">
 						</div>
@@ -43,7 +57,7 @@
 
 					<!-- Text input-->
 					<div class="form-group">
-						<label class="col-md-4 control-label" for="coord">Longitud</label>
+						<label class="col-md-2 control-label" for="coord">Longitud</label>
 						<div class="col-md-4">
 							<input id="lng" name="Coordinates" type="number" pattern="[0-9]+([\.,][0-9]+)?" step="0.0001" class="form-control input-md" required="">
 						</div>
@@ -51,7 +65,7 @@
 
 					<!-- Text input-->
 					<div class="form-group">
-						<label class="col-md-4 control-label" for="img">Imagen</label>
+						<label class="col-md-2 control-label" for="img">Imagen</label>
 						<div class="col-md-4">
 							<input id="img" name="img" type="text"  class="form-control input-md" required="">
 							<span class="help-block">link</span>
@@ -60,24 +74,16 @@
 
 					<!-- Textarea -->
 					<div class="form-group">
-						<label class="col-md-4 control-label" for="info">Descripción</label>
+						<label class="col-md-2 control-label" for="info">Descripción</label>
 						<div class="col-md-4">
 							<textarea class="form-control" id="info" name="info"></textarea>
 						</div>
 					</div>
 
 					<!-- Button -->
-
-					<div class="form-horizontal">
-						<label class="col-md-4 control-label" for="send"></label>
-						<div class="col-md-1">
-							<button id="delete" name="delete" class="btn btn-default">Eliminar</button>
-						</div>
-					</div>
-
 					<div class="form-group">
-						<label class="col-md-1 control-label" for="send"></label>
-						<div class="col-md-2">
+						<label class="col-md-1 control-label" ></label>
+						<div class="col-md-4">
 							<button id="send" name="send" class="btn btn-default">Modificar</button>
 						</div>
 					</div>

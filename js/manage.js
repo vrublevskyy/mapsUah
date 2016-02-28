@@ -1,6 +1,5 @@
 //---------------------- Global vars
 var map = L.map('map').setView([40.5126759, -3.3502846], 13);
-var myServer="http://router.project-osrm.org"
 var routeCoordinates={
   "origin":{
     "lat":null,
@@ -12,7 +11,6 @@ var routeCoordinates={
   }
 }
 var position=null
-
 
 function getLocation(myCallback) {
   function setPosition(position) {
@@ -30,27 +28,42 @@ function getLocation(myCallback) {
 }
 
 $('#send').click( function() {
+
     $.ajax({
-        url: 'http://localhost:3000/addFacultad',
+        url: 'http://www.paradisecity.me:3000/updateFacultad',
         type: 'post',
         dataType: 'json',
         data: $('#sendForm').serialize(),
-        success: function(data) {
-                   window.history.go(-1);
-                 }
+        success: function() {
+                  alert("Actualizado");
+                   window.location.href="http://192.168.1.150:8082/index.html"
+                 },
+         error:  function(XMLHttpRequest, textStatus, errorThrown) {
+             alert("Status: " + textStatus+"Error: " + errorThrown);
+             window.location.href="http://192.168.1.150:8082/index.html"
+         }
     });
 });
 
 $('#delete').click( function() {
+  var parser = document.createElement('a');
+  parser.href = window.location.href;
+  data={"id":parser.hash.replace(/\#/g, '') }
     $.ajax({
-        url: 'http://localhost:3000/addFacultad',
-        type: 'DELETE',
+        url: 'http://www.paradisecity.me:3000/removeFacultad',
+        type: 'post',
         dataType: 'json',
-        data: $('#sendForm').serialize(),
+        data: data,
         success: function(data) {
-                   window.history.go(-1);
-                 }
+                alert("Eliminado");
+                   window.location.href="http://192.168.1.150:8082/index.html"
+                 },
+         error:  function(XMLHttpRequest, textStatus, errorThrown) {
+             alert("Status: " + textStatus+"Error: " + errorThrown);
+             window.location.href="http://192.168.1.150:8082/index.html"
+         }
     });
+    return false;
 });
 
 
@@ -82,3 +95,28 @@ $( "#lng" ).change(function(value) {
 });
 
 //---------------------- Map operations: routes, search points.....
+
+
+$(document).ready(function () {
+  var parser = document.createElement('a');
+  parser.href = window.location.href;
+  data={"id":parser.hash.replace(/\#/g, '') }
+  $.ajax({
+      url: 'http://www.paradisecity.me:3000/findById',
+      type: 'POST',
+      dataType: 'json',
+      data: data,
+      success: function(data) {
+                document.getElementById("doc_id").value =data['_id']
+                document.getElementById("lat").value = data.geometry.coordinates[0];
+                document.getElementById("lng").value = data.geometry.coordinates[1];
+                document.getElementById("name").value = data.properties.name;
+                document.getElementById("img").value = data.properties.imgSrc;
+                document.getElementById("info").value = data.properties.info;
+                marker.setLatLng(data.geometry.coordinates);
+               },
+     error:  function(XMLHttpRequest, textStatus, errorThrown) {
+         alert("Status: " + textStatus+"Error: " + errorThrown);
+     }
+  });
+});
