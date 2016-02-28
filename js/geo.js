@@ -25,11 +25,10 @@ $(document).ready(function () {
              for (var facultad in data) {
 console.log(data[facultad]._id)
 
-               $('#facultades').append("<div id=\""+facultad+"\" class=\"col-lg-3 col-md-4 col-xs-6 thumb\"> <a><img src="+data[facultad].properties.imgSrc+"></a>  \
+               $('#facultades').append("<div class=\"col-lg-3 col-md-4 col-xs-6 thumb\"><div id=\""+facultad+"\"  onclick=\"searchRouteFromPoint('"+data[facultad]._id+"')\"> <a><img src="+data[facultad].properties.imgSrc+"></a>  \
                  <h4><a>"+data[facultad].properties.name+"</a></h4> \
-                 <p>"+data[facultad].properties.info+"</p> \
-                 <button type=\"button\" class=\"btn btn-default btn-lg\" onclick=\"searchRouteFromGPS('"+data[facultad]._id+"')\" >Desde mi pos</button> \
-                 <button type=\"button\" class=\"btn btn-default btn-lg\" onclick=\"searchRouteFromMap('"+data[facultad]._id+"')\" >Desde el punto del mapa</button> \
+                 <p>"+data[facultad].properties.info+"</p> </div> \
+                 <button type=\"button\" class=\"btn btn-default btn-lg\" onclick=\"searchRouteFromGPS('"+data[facultad]._id+"')\" >Desde mi posición</button> \
                </div>");
              }
            },
@@ -50,7 +49,25 @@ function searchRouteFromGPS (id){
               routeCoordinates.destination.lat = data.geometry.coordinates[0];
               routeCoordinates.destination.lng = data.geometry.coordinates[1];
 
-              routeFromMyLocToDest();
+              routeFromMyLocation();
+             },
+   error:  function(XMLHttpRequest, textStatus, errorThrown) {
+       alert("Status: " + textStatus+"Error: " + errorThrown);
+   }
+});
+}
+
+function searchRouteFromPoint (id){
+  $.ajax({
+    url: 'http://www.paradisecity.me:3000/findById',
+    type: 'POST',
+    dataType: 'json',
+    data: {'id':id},
+    success: function(data) {
+              routeCoordinates.destination.lat = data.geometry.coordinates[0];
+              routeCoordinates.destination.lng = data.geometry.coordinates[1];
+
+              routeFromPoint();
              },
    error:  function(XMLHttpRequest, textStatus, errorThrown) {
        alert("Status: " + textStatus+"Error: " + errorThrown);
@@ -85,7 +102,7 @@ var marker = L.marker([0,0]).addTo(map);
 
 function onMapClick(e) {
   marker.setLatLng(e.latlng);
-  routeCoordinates.destination=e.latlng
+  routeCoordinates.origin=e.latlng
 }
 
 map.on('click', onMapClick);
@@ -120,7 +137,7 @@ jQuery.ajax({
 }
 
 //ruta desde mi ubicacion hasta un destino seleccionado
-function routeFromMyLocToDest() {
+function routeFromMyLocation() {
   position=null
   function myCallback(position) {
     routeCoordinates.origin.lat=position.latitude;
@@ -132,13 +149,12 @@ function routeFromMyLocToDest() {
 }
 
 //ruta desde mi ubicacion hasta un elemento guardado en la BBDD
-function routeFromMyLocToCusPoint() {
-  position=null
-  function myCallback(position) {
-    routeCoordinates.origin.lat=position.latitude;
-    routeCoordinates.origin.lng=position.longitude;
-    console.log(position)
-    getRoute(routeCoordinates)
+function routeFromPoint() {
+    console.log(routeCoordinates.origin)
+  if (routeCoordinates.origin.lat && routeCoordinates.origin.lng) {
+    getRoute(routeCoordinates);
+  }else {
+    alert("Seleccione un punto en el mapa")
   }
-  getLocation(myCallback)
+
 }
