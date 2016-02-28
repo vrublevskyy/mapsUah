@@ -23,6 +23,11 @@ router.get('/', function(req, res) {
    res.sendFile('/root/admin/index.html')
 });
 
+router.get('/manage', function(req, res) {
+   res.sendFile('/root/admin/manage.html')
+});
+
+
 router.get('/css/thumbnail-gallery.css', function(req, res) {
    res.sendFile('/root/admin/css/thumbnail-gallery.css')
 });
@@ -45,6 +50,18 @@ router.get('/js/bootstrap.min.js', function(req, res) {
 
 router.get('/js/page.js', function(req, res) {
    res.sendFile('/root/admin/js/page.js')
+});
+
+router.get('/css/style.css', function(req, res) {
+   res.sendFile('/root/admin/css/style.css')
+});
+
+router.get('/node_modules/polyline/src/polyline.js', function(req, res) {
+   res.sendFile('/root/admin/node_modules/polyline/src/polyline.js')
+});
+
+router.get('/js/manage.js', function(req, res) {
+   res.sendFile('/root/admin/js/manage.js')
 });
 
 
