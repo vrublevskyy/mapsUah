@@ -2,22 +2,20 @@ var express = require("express"),
     app = express(),
     bodyParser  = require("body-parser"),
     methodOverride = require("method-override"),
-    http = require('http');
+    http = require('http'),
+    mongoose = require('mongoose');
 
+//la base de datos esta en el mismo servidor
+mongoose.connect('mongodb://localhost/facultades');
 
-    var  mongoose = require('mongoose');
-    mongoose.connect('mongodb://localhost/facultades');
-
-    var db = mongoose.connection;
+var db = mongoose.connection;
     db.on('error', console.error.bind(console, 'connection error:'));
     db.once('open', function() {
       console.log("OPEN")
     });
 
 
-    var control=require('./controllers/facultades');
-
-
+var control=require('./controllers/facultades');
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -28,11 +26,13 @@ app.use(function(req, res, next) {
 });
 app.use(methodOverride());
 
+
+//****************************** Rutas ******************
 var router = express.Router();
 
-var osrmServer="http://router.project-osrm.org"
+//****************** GET
 
-
+//Devuelve todas las facultades
 router.get('/getAllFacultades', function(req, res) {
   var callback=function(data) {
     res.send(data);
@@ -41,51 +41,69 @@ router.get('/getAllFacultades', function(req, res) {
 
 });
 
-router.post('/addFacultad', function(req, res) {
-  control.addFacultad(req.body)
-  res.sendStatus(200);
-});
-
-
-router.post('/findById', function(req, res) {
-  if (req.body.id) {
-    var callback=function(data) {
-      res.send(data);
-    }
-    control.findById(req.body.id,callback)
-  }
-});
-
-router.post('/updateFacultad', function(req, res) {
-  if (req.body.id) {
-    var callback=function(data) {
-console.log("OK")
-      res.send(data);
-    }
-    control.updateFacultad(req.body.id,req.body,callback)
-  }
-});
-
-router.post('/removeFacultad', function(req, res) {
-  if (req.body.id) {
-    var callback=function(err,data) {
-      if (err) {
-        res.sendStatus(404);
-      }
-      res.sendStatus(200);
-    }
-    control.remove(req.body.id,callback)
-  }
-});
-
-router.post('/search/facultad', function(req, res) {
+router.get('/searchFacultad', function(req, res) {
   if (req.body.name) {
     var callback=function(data) {
       res.send(data);
     }
     control.findOne(req.body.name,callback)
   }
+});
 
+//****************** POST
+
+//Añade nueva facultad
+router.post('/addFacultad', function(req, res) {
+  var callback=function(err) {
+    if (err) {
+      res.sendStatus(400);
+    }else {
+      res.sendStatus(200);
+    }
+  }
+  control.addFacultad(req.body,callback)
+});
+
+//Busca por id
+router.post('/findById', function(req, res) {
+  if (req.body.id) {
+    var callback=function(err,data) {
+      if (err) {
+        res.sendStatus(400);
+      }else {
+        res.send(data);
+      };
+    };
+    control.findById(req.body.id,callback)
+  }
+});
+
+//Actualiza una facultad
+router.post('/updateFacultad', function(req, res) {
+  if (req.body.id) {
+    var callback=function(err,data) {
+      if (err) {
+        res.sendStatus(400);
+      }else {
+        res.send(data);
+      };
+    }
+    control.updateFacultad(req.body.id,req.body,callback)
+  }
+});
+
+//Elimina una facultad
+router.post('/removeFacultad', function(req, res) {
+  if (req.body.id) {
+    var callback=function(err,data) {
+      if (err) {
+        res.sendStatus(400);
+      }else {
+        res.sendStatus(200);
+      };
+    }
+    control.remove(req.body.id,callback)
+  }
 });
 
 
