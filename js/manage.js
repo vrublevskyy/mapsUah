@@ -33,8 +33,8 @@ $('#send').click( function() {
         url: 'http://www.paradisecity.me:3000/updateFacultad',
         type: 'post',
         dataType: 'json',
-        data: data=$('#sendForm').serialize(),
-        success: function(data) {
+        data: $('#sendForm').serialize(),
+        success: function() {
                   alert("Actualizado");
                    window.location.href="http://192.168.1.150:8082/index.html"
                  },
