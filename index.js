@@ -34,8 +34,12 @@ var router = express.Router();
 
 //Devuelve todas las facultades
 router.get('/getAllFacultades', function(req, res) {
-  var callback=function(data) {
-    res.send(data);
+  var callback=function(err,data) {
+    if (err) {
+      res.sendStatus(400);
+    }else {
+      res.sendStatus(200);
+    }
   }
   control.getAllFacultades(callback)
 
@@ -43,8 +47,12 @@ router.get('/getAllFacultades', function(req, res) {
 
 router.get('/searchFacultad', function(req, res) {
   if (req.body.name) {
-    var callback=function(data) {
-      res.send(data);
+    var callback=function(err,data) {
+      if (err) {
+        res.sendStatus(400);
+      }else {
+        res.sendStatus(200);
+      }
     }
     control.findOne(req.body.name,callback)
   }
