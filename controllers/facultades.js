@@ -71,5 +71,6 @@ exports.updateFacultad=function(id,data,callback) {
 	 Facultad.update({_id: id},{ 'properties.name':data.name, 'properties.imgSrc':data.img, 'properties.info':data.info, 'geometry.coordinates':data.Coordinates}, {upsert: false}, function(err,data) {
         if (callback) {
           return callback(err,data);
-        });
+        }
+      });
 }
