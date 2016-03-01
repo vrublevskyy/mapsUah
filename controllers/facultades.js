@@ -21,8 +21,7 @@ exports.addFacultad=function(data,callback) {
       "info":data.info
     }
   });
-
-  facultad1.save(function(err, facultad1,callback) {
+  facultad1.save(function(err, facultad1) {
     if (callback) {
       return callback(err);
     }
