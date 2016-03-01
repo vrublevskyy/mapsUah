@@ -38,7 +38,7 @@ router.get('/getAllFacultades', function(req, res) {
     if (err) {
       res.sendStatus(400);
     }else {
-      res.sendStatus(200);
+      res.send(data);
     }
   }
   control.getAllFacultades(callback)
@@ -51,7 +51,7 @@ router.get('/searchFacultad', function(req, res) {
       if (err) {
         res.sendStatus(400);
       }else {
-        res.sendStatus(200);
+        res.send(data);
       }
     }
     control.findOne(req.body.name,callback)
@@ -102,12 +102,15 @@ router.post('/updateFacultad', function(req, res) {
 
 //Elimina una facultad
 router.post('/removeFacultad', function(req, res) {
-  if (req.body.id) {
+ 
+ if (req.body.id) {
+console.log(req.body.id)
     var callback=function(err,data) {
-      if (err) {
+ console.log(err)
+     if (err) {
         res.sendStatus(400);
       }else {
-        res.sendStatus(200);
+        res.send(data);
       };
     }
     control.remove(req.body.id,callback)
