@@ -104,13 +104,11 @@ router.post('/updateFacultad', function(req, res) {
 router.post('/removeFacultad', function(req, res) {
  
  if (req.body.id) {
-console.log(req.body.id)
     var callback=function(err,data) {
- console.log(err)
      if (err) {
         res.sendStatus(400);
       }else {
-        res.send(data);
+        res.send({'data':data});
       };
     }
     control.remove(req.body.id,callback)
