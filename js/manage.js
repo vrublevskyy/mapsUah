@@ -36,12 +36,10 @@ $('#send').click( function() {
         data: $('#sendForm').serialize(),
         success: function() {
                   alert("Actualizado");
-                   window.location.href="http://192.168.1.150:8082/index.html"
-                 },
+                window.location.href="http://ivr0.myqnapcloud.com:8082/admin/index.html" },
          error:  function(XMLHttpRequest, textStatus, errorThrown) {
              alert("Status: " + textStatus+"Error: " + errorThrown);
-             window.location.href="http://192.168.1.150:8082/index.html"
-         }
+             window.location.href="http://ivr0.myqnapcloud.com:8082/admin/index.html"         }
     });
 });
 
@@ -56,12 +54,11 @@ $('#delete').click( function() {
         data: data,
         success: function(data) {
                 alert("Eliminado");
-                   window.location.href="http://192.168.1.150:8082/index.html"
+                   window.location.href="http://ivr0.myqnapcloud.com:8082/admin/index.html"
                  },
          error:  function(XMLHttpRequest, textStatus, errorThrown) {
              alert("Status: " + textStatus+"Error: " + errorThrown);
-             window.location.href="http://192.168.1.150:8082/index.html"
-         }
+       window.location.href="http://ivr0.myqnapcloud.com:8082/admin/index.html"         }
     });
     return false;
 });
