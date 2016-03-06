@@ -58,6 +58,22 @@ router.get('/searchFacultad', function(req, res) {
   }
 });
 
+//Busca por id
+router.get('/findById/:id', function(req, res) {
+var id = req.params.id;
+  if (id) {
+    var callback=function(err,data) {
+      if (err) {
+        res.sendStatus(400);
+      }else {
+        res.send(data);
+      };
+    };
+    control.findById(id,callback)
+  }
+});
+
+
 //****************** POST
 
 //Añade nueva facultad
@@ -72,19 +88,6 @@ router.post('/addFacultad', function(req, res) {
   control.addFacultad(req.body,callback)
 });
 
-//Busca por id
-router.get('/findById', function(req, res) {
-  if (req.body.id) {
-    var callback=function(err,data) {
-      if (err) {
-        res.sendStatus(400);
-      }else {
-        res.send(data);
-      };
-    };
-    control.findById(req.body.id,callback)
-  }
-});
 
 //Actualiza una facultad
 router.post('/updateFacultad', function(req, res) {
