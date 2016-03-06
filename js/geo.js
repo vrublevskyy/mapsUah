@@ -41,10 +41,9 @@ console.log(data[facultad]._id)
 
 function searchRouteFromGPS (id){
   $.ajax({
-    url: 'http://www.paradisecity.me:3000/findById',
+    url: 'http://www.paradisecity.me:3000/findById/'+id,
     type: 'GET',
     dataType: 'json',
-    data: {'id':id},
     success: function(data) {
               routeCoordinates.destination.lat = data.geometry.coordinates[0];
               routeCoordinates.destination.lng = data.geometry.coordinates[1];
@@ -59,10 +58,9 @@ function searchRouteFromGPS (id){
 
 function searchRouteFromPoint (id){
   $.ajax({
-    url: 'http://www.paradisecity.me:3000/findById',
+    url: 'http://www.paradisecity.me:3000/findById/'+id,
     type: 'GET',
     dataType: 'json',
-    data: {'id':id},
     success: function(data) {
               routeCoordinates.destination.lat = data.geometry.coordinates[0];
               routeCoordinates.destination.lng = data.geometry.coordinates[1];
