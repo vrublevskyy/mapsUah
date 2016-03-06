@@ -100,7 +100,7 @@ $(document).ready(function () {
   data={"id":parser.hash.replace(/\#/g, '') }
   $.ajax({
       url: 'http://www.paradisecity.me:3000/findById',
-      type: 'POST',
+      type: 'GET',
       dataType: 'json',
       data: data,
       success: function(data) {
