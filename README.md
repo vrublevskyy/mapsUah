@@ -1,5 +1,5 @@
 ### mapsUah
-Branch para la parte servidor de la aplicación.
+Branch para la parte servidor de la aplicación. Es independiente de los clientes (clientAdmin y clientUser)
 
 Estructura de los directorios:
 
