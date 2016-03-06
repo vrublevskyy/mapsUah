@@ -23,3 +23,5 @@ Es el modelo de datos que describe la facultad en el formato geoJSON.
 ##### index.js
 
 El modulo principal. Utiliza mongoose para conectarse a mongo y express para el servidor y las rutas.
+
+![Alt text](https://github.com/vrublevskyy/mapsUah/blob/master/estructura.png)
