@@ -1,6 +1,6 @@
 //---------------------- Global vars
 var map = L.map('map').setView([40.5126759, -3.3502846], 13);
-var myServer="http://router.project-osrm.org"
+var routesServer="http://router.project-osrm.org"
 var routeCoordinates={
   "origin":{
     "lat":null,
@@ -15,6 +15,7 @@ var position=null
 
 //---------------------- Global settings functions
 
+//Muestra las facultades disponibles
 $(document).ready(function () {
   $.ajax({
   url: 'http://www.paradisecity.me:3000/getAllFacultades',
@@ -23,8 +24,6 @@ $(document).ready(function () {
   success: function(data) {
              console.log(data)
              for (var facultad in data) {
-console.log(data[facultad]._id)
-
                $('#facultades').append("<div class=\"col-lg-3 col-md-4 col-xs-6 thumb\"><div id=\""+facultad+"\"  onclick=\"searchRouteFromPoint('"+data[facultad]._id+"')\"> <a><img src="+data[facultad].properties.imgSrc+"></a>  \
                  <h4><a>"+data[facultad].properties.name+"</a></h4> \
                  <p>"+data[facultad].properties.info+"</p> </div> \
@@ -39,6 +38,7 @@ console.log(data[facultad]._id)
   });
 });
 
+//Busca una ruta desde la posición actual hasta una facultad con el _id que se pasa por parametro
 function searchRouteFromGPS (id){
   $.ajax({
     url: 'http://www.paradisecity.me:3000/findById/'+id,
@@ -56,6 +56,7 @@ function searchRouteFromGPS (id){
 });
 }
 
+//Busca una ruta desde la posición seleccionada en el mapa hasta una facultad con el _id que se pasa por parametro
 function searchRouteFromPoint (id){
   $.ajax({
     url: 'http://www.paradisecity.me:3000/findById/'+id,
@@ -73,6 +74,7 @@ function searchRouteFromPoint (id){
 });
 }
 
+//Obtiene la posición actual
 function getLocation(myCallback) {
   function setPosition(position) {
     position = position.coords;
@@ -98,6 +100,7 @@ L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
 
 var marker = L.marker([0,0]).addTo(map);
 
+//Muestra la marca en el mapa
 function onMapClick(e) {
   marker.setLatLng(e.latlng);
   routeCoordinates.origin=e.latlng
@@ -111,9 +114,8 @@ map.on('click', onMapClick);
 
 //Devuelve una ruta entre el origen y el destino
 function getRoute(routeCoordinates) {
-  console.log("2")
   var options = {
-    host: myServer,
+    host: routesServer,
     path: '/viaroute?loc='+routeCoordinates.origin.lat+','+routeCoordinates.origin.lng+'&loc='+routeCoordinates.destination.lat+','+routeCoordinates.destination.lng+'&instructions=false&compression=true'
   };
 console.log(JSON.stringify(routeCoordinates));
@@ -148,7 +150,6 @@ function routeFromMyLocation() {
 
 //ruta desde mi ubicacion hasta un elemento guardado en la BBDD
 function routeFromPoint() {
-    console.log(routeCoordinates.origin)
   if (routeCoordinates.origin.lat && routeCoordinates.origin.lng) {
     getRoute(routeCoordinates);
   }else {
