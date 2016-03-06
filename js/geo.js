@@ -1,5 +1,4 @@
-//---------------------- Global vars
-var map = L.map('map').setView([40.5126759, -3.3502846], 13);
+//---------------------- Global data
 var routeCoordinates={
   "origin":{
     "lat":null,
@@ -12,7 +11,8 @@ var routeCoordinates={
 }
 var position=null
 
-
+//Geolocalización en el navegador
+//El callback se ejecuta al obtener las cordenadas
 function getLocation(myCallback) {
   function setPosition(position) {
     position = position.coords;
@@ -28,6 +28,43 @@ function getLocation(myCallback) {
   }
 }
 
+
+
+//---------------------- Global map settings,functions,vars
+var map = L.map('map').setView([40.5126759, -3.3502846], 13);
+
+// add an OpenStreetMap tile layer
+L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+  attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+}).addTo(map);
+
+var marker = L.marker([0,0]).addTo(map);
+var map = L.map('map').setView([40.5126759, -3.3502846], 13);
+
+//Guarda las coordenadas del mapa y los muestra en el textbox
+function onMapClick(e) {
+  marker.setLatLng(e.latlng);
+  document.getElementById("lat").value = e.latlng.lat.toFixed(4);
+  document.getElementById("lng").value = e.latlng.lng.toFixed(4);
+  routeCoordinates.destination=e.latlng
+}
+
+map.on('click', onMapClick);
+
+//Axtualiza el textbox al modificar las coordenadas
+$( "#lat" ).change(function(value) {
+  routeCoordinates.destination.lat=value.target.valueAsNumber;
+  marker.setLatLng(routeCoordinates.destination);
+});
+$( "#lng" ).change(function(value) {
+  routeCoordinates.destination.lng=value.target.valueAsNumber;
+  marker.setLatLng(routeCoordinates.destination);
+});
+
+//----------------------Operations
+
+
+//Envia el formulario al servidor
 $('#send').click( function() {
     $.ajax({
         url: 'http://www.paradisecity.me:3000/addFacultad',
@@ -39,34 +76,3 @@ $('#send').click( function() {
                  }
     });
 });
-
-
-
-//---------------------- Global map settings,functions,vars
-
-// add an OpenStreetMap tile layer
-L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
-  attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-}).addTo(map);
-
-var marker = L.marker([0,0]).addTo(map);
-
-function onMapClick(e) {
-  marker.setLatLng(e.latlng);
-  document.getElementById("lat").value = e.latlng.lat.toFixed(4);
-  document.getElementById("lng").value = e.latlng.lng.toFixed(4);
-  routeCoordinates.destination=e.latlng
-}
-
-map.on('click', onMapClick);
-
-$( "#lat" ).change(function(value) {
-  routeCoordinates.destination.lat=value.target.valueAsNumber;
-  marker.setLatLng(routeCoordinates.destination);
-});
-$( "#lng" ).change(function(value) {
-  routeCoordinates.destination.lng=value.target.valueAsNumber;
-  marker.setLatLng(routeCoordinates.destination);
-});
-
-//---------------------- Map operations: routes, search points.....

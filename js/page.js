@@ -1,3 +1,5 @@
+//Genera la lista de las facultades a partir de los datos del servidor
+
 $.ajax({
     url: 'http://www.paradisecity.me:3000/getAllFacultades',
     type: 'GET',
