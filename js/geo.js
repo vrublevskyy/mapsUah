@@ -42,7 +42,7 @@ console.log(data[facultad]._id)
 function searchRouteFromGPS (id){
   $.ajax({
     url: 'http://www.paradisecity.me:3000/findById',
-    type: 'POST',
+    type: 'GET',
     dataType: 'json',
     data: {'id':id},
     success: function(data) {
@@ -60,7 +60,7 @@ function searchRouteFromGPS (id){
 function searchRouteFromPoint (id){
   $.ajax({
     url: 'http://www.paradisecity.me:3000/findById',
-    type: 'POST',
+    type: 'GET',
     dataType: 'json',
     data: {'id':id},
     success: function(data) {
