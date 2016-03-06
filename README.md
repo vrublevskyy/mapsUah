@@ -11,7 +11,7 @@ Página para la administración de la aplicación.
 ##### ./js
 
 * geo: tiene los metodos para gestionar el mapa y todo lo relacionado con ello. 
-  Utiliza el modulo polyline para decodificar la respuesta del servidor osrm.
+
 * page.js: genera la lista de las facultades disponibles para administrar, recoge los datos en el servidor nodejs de la branch master
 * manage.js: contiene los metodos para las operaciones de actualización, añadir nuevos elementos o eliminarlos.
 
