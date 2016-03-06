@@ -99,10 +99,9 @@ $(document).ready(function () {
   parser.href = window.location.href;
   data={"id":parser.hash.replace(/\#/g, '') }
   $.ajax({
-      url: 'http://www.paradisecity.me:3000/findById',
+      url: 'http://www.paradisecity.me:3000/findById/'+data.id,
       type: 'GET',
       dataType: 'json',
-      data: data,
       success: function(data) {
                 document.getElementById("doc_id").value =data['_id']
                 document.getElementById("lat").value = data.geometry.coordinates[0];
