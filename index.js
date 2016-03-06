@@ -73,7 +73,7 @@ router.post('/addFacultad', function(req, res) {
 });
 
 //Busca por id
-router.post('/findById', function(req, res) {
+router.get('/findById', function(req, res) {
   if (req.body.id) {
     var callback=function(err,data) {
       if (err) {
